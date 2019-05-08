@@ -1,0 +1,5 @@
+CREATE TABLE [dbo].[Session]
+(
+	[Id] INT NOT NULL IDENTITY PRIMARY KEY,
+	[Value] INT NOT NULL
+)
