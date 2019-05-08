@@ -19,9 +19,8 @@ steps:
     solution: 'db/db.sqlproj'
     configuration: '$(buildConfiguration)'
 
-- script: |
-    dotnet test --filter Unit  --configuration $(buildConfiguration) --logger trx  
-  displayName: Run api tests
+- script: dotnet test --filter "FullyQualifiedName~Unit"  --configuration $(buildConfiguration) --logger trx  
+  displayName: Run api unit tests
   workingDirectory: 'api.tests'
 
 - task: PublishTestResults@2
