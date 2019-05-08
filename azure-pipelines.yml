@@ -26,6 +26,19 @@ steps:
 
 - script: |
     SqlLocalDB.exe create MSSQLLocalDB -s
+  displayName: Create local database
+
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  inputs:
+    TaskType: 'dacpac'
+    DacpacFile: 'db\db.sqlproj'
+    TargetMethod: 'server'
+    ServerName: '(localdb)\MSSQLLocalDb'
+    DatabaseName: 'ndcnm'
+    AuthScheme: 'windowsAuthentication'
+
+- script: |
+    SqlLocalDB.exe create MSSQLLocalDB -s
     dotnet test  --configuration $(buildConfiguration) --logger trx  
   displayName: Run api tests
   workingDirectory: 'api.tests'
