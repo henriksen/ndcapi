@@ -9,7 +9,7 @@ variables:
 
 steps:
 - script: |
-    dotnet publish api.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY/api
+    dotnet publish api.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/api
   displayName: 'dotnet publish $(buildConfiguration)'
   workingDirectory: 'api'
 
@@ -36,7 +36,7 @@ steps:
   inputs:
     pathtoPublish: "$(Build.ArtifactStagingDirectory)/api"
     artifactName: "api"
-  displayName: Publish backend artifacts
+  displayName: Publish api artifacts
 
 - task: PublishBuildArtifacts@1
   inputs:
