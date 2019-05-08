@@ -24,8 +24,6 @@ namespace api.Services
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
-            Console.WriteLine("Connection String: " + _connectionString);
-
         }
 
         public Session Get(int id)
