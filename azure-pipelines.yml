@@ -25,7 +25,8 @@ steps:
     solution: 'db/db.sqlproj'
     configuration: '$(buildConfiguration)'
 
-- script: dotnet test --filter "FullyQualifiedName~Unit"  --configuration $(buildConfiguration) --logger trx  
+# - script: dotnet test --filter "FullyQualifiedName~Unit"  --configuration $(buildConfiguration) --logger trx  
+- script: dotnet test  --configuration $(buildConfiguration) --logger trx  
   displayName: Run api unit tests
   workingDirectory: 'api.tests'
 
