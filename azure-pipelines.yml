@@ -13,5 +13,27 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: |
+    dotnet publish api.csproj --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY/api
+  displayName: 'dotnet publish $(buildConfiguration)'
+  workingDirectory: 'api'
+
+- script: |
+    dotnet test  --configuration $(buildConfiguration) --logger trx  
+  displayName: Run api tests
+  workingDirectory: 'api.tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: "**/*.trx"
+    testRunTitle: API tests
+    failTaskOnFailedTests: true
+  displayName: Publish api tests
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: "$(Build.ArtifactStagingDirectory)/api"
+    artifactName: "api"
+  displayName: Publish backend artifacts
