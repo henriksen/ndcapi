@@ -12,7 +12,15 @@ steps:
   inputs:
     folderPath: 'api/'
     fileType: 'json'
-    targetFiles: '**/appSettings.json'
+    targetFiles: '**/appSettings.json
+      **/appSettings.Development.json'
+
+- task: FileTransform@1
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    fileType: 'json'
+    targetFiles: 'fil1
+      fil2'
 
 - script: |
     dotnet publish api.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/api
