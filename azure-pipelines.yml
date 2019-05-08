@@ -8,6 +8,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: FileTransform@1
+  inputs:
+    folderPath: 'api/'
+    fileType: 'json'
+    targetFiles: '**/appSettings.json'
+
 - script: |
     dotnet publish api.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/api
   displayName: 'dotnet publish $(buildConfiguration)'
