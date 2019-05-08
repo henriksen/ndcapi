@@ -12,8 +12,7 @@ steps:
   inputs:
     folderPath: 'api/'
     fileType: 'json'
-    targetFiles: '**/appSettings.json
-      **/appSettings.Development.json'
+    targetFiles: '**/appSettings*.json'
 
 - task: FileTransform@1
   inputs:
