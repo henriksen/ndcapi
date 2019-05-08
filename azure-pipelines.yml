@@ -18,6 +18,12 @@ steps:
   displayName: 'dotnet publish $(buildConfiguration)'
   workingDirectory: 'api'
 
+- task: VSBuild@1
+  displayName: 'vsbuild db/db.sqlproj $(buildConfiguration)'
+  inputs:
+    solution: 'db/db.sqlproj'
+    configuration: '$(buildConfiguration)'
+
 - script: |
     SqlLocalDB.exe create MSSQLLocalDB -s
     dotnet test  --configuration $(buildConfiguration) --logger trx  
