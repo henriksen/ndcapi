@@ -43,3 +43,9 @@ steps:
     pathtoPublish: "db/bin/Release/"
     artifactName: "db"
   displayName: Publish db artifacts
+  
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: "api.tests/bin/Release/"
+    artifactName: "api.test"
+  displayName: Publish test artifacts
