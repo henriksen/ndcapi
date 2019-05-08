@@ -17,20 +17,7 @@ namespace api.Controllers
         {
             _sessionService = sessionService;
         }
-
-        /// <summary>
-        /// Gets the current value of a session. 
-        /// </summary>
-        /// <param name="id">Session id</param>
-        /// <returns>Current value.</returns>
-        [HttpGet("{id}")]
-		public ActionResult<int> Get(int id)
-		{
-            var session = _sessionService.Get(id);
-            if (session is null) return NotFound();
-            return session.Value;
-		}
-
+        
 		/// <summary>
 		/// Creates a new session
 		/// </summary>
@@ -53,5 +40,18 @@ namespace api.Controllers
             _sessionService.Set(id, value);
 		}
 
-	}
+        /// <summary>
+        /// Gets the current value of a session. 
+        /// </summary>
+        /// <param name="id">Session id</param>
+        /// <returns>Current value.</returns>
+        [HttpGet("{id}")]
+        public ActionResult<int> Get(int id)
+        {
+            var session = _sessionService.Get(id);
+            if (session is null) return NotFound();
+            return session.Value;
+        }
+
+    }
 }
